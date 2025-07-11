@@ -21,6 +21,10 @@ app.use(petRouter)
 app.use('/form', AdoptFormRoute)
 app.use('/admin', AdminRoute)
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 mongoose.connect(process.env.mongooseURL)
     .then(() => {
         console.log('Connected to DB');
