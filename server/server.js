@@ -25,14 +25,18 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-mongoose.connect(process.env.mongooseURL)
-    .then(() => {
-        console.log('Connected to DB');
-        const PORT = 4000;
-        app.listen(PORT, () => {
-            console.log(`Listening on port ${PORT}`)
+const dbConnect = async () => {
+    await mongoose.connect(process.env.mongooseURL)
+        .then(() => {
+            console.log('Connected to DB');
         })
-    })
-    .catch((err) => {
-        console.error(err);
-    })
+        .catch((err) => {
+            console.error(err);
+        })
+}
+
+dbConnect();
+const PORT = 4000;
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
+})
